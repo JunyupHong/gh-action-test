@@ -52,7 +52,7 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          path: build/
+          name: built-artifact
           
       - run: ls build
       
