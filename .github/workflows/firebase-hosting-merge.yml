@@ -31,27 +31,34 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
+      - run: ls build
+
       - name: Build webpack
         run: yarn build
+
+      - run: ls build
       
       - uses: actions/upload-artifact@v2
         with:
           name: built-artifact
           path: build/
+      
+      - run: ls build
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+      - run: ls build
       - uses: actions/checkout@v2
       
-      - name: Deploy firebase
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GITHUB_ACTIONS_TESTT }}
-        run: |
-          npm install firebase-tools
-          npx firebase deploy --token $FIREBASE_TOKEN
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GITHUB_ACTIONS_TESTT }}'
+          channelId: live
+          projectId: github-actions-testt
 
 
   # build_and_deploy:
