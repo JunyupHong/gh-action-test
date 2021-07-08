@@ -11,15 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
-      - run: npm run build
-      - run: ls -al
-      - uses: actions/upload-artifact@v2
+      - uses: actions/setup-node@v2
         with:
-          name: built-artifact
-          path: build/
-          
+          node-version: ${{ matrix.node }}
+
+      - run: yarn install
       - run: ls -al
+      - run: yarn build
+          
+      - run: ls build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
