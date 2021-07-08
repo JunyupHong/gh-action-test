@@ -48,8 +48,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: ls build
       - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          path: build/
+          
+      - run: ls build
       
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
