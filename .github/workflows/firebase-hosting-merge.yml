@@ -31,8 +31,6 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - run: ls build
-
       - name: Build webpack
         run: yarn build
 
