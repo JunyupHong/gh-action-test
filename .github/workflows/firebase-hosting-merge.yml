@@ -54,7 +54,7 @@ jobs:
         with:
           name: built-artifact
           
-      - run: ls build
+      - run: ls -al
       
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
